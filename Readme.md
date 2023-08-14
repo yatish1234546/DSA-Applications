@@ -542,7 +542,7 @@ Explanation: Text editors often use a stack to implement undo and redo functiona
 
 ## Call Stack in Function Execution
 
-Explanation: When functions are called in a program, their execution is added to a call stack. The most recently called function's execution is completed before moving to the previous one.
+Explanation: When functions are called in a program, their execution is added to a call stack. The most recently called function's execution is completed before moving to the previous one. The techniue is used in Debugger modes of many Text Editors, IDE and Browser Console.
 
 
     #include <stdio.h>
