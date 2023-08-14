@@ -1,6 +1,15 @@
 # DSA and its Applications
 
-### [Application of Queues ](https://github.com/yatish1234546/DSA-Applications/blob/main/Readme.md#application-of-queues)
+1**. [Application of Queues ](https://github.com/yatish1234546/DSA-Applications/blob/main/Readme.md#application-of-queues)
+2. [Application of Stacks ](https://github.com/yatish1234546/DSA-Applications/blob/main/Readme.md#application-of-stacks)
+3. [Application of Linked Lists ](https://github.com/yatish1234546/DSA-Applications/blob/main/Readme.md#application-of-linked-lists)
+   1. [Singly Linked list](https://github.com/yatish1234546/DSA-Applications/blob/main/Readme.md#singly-linked-list-examples)
+   2. [Doubly Linked list](https://github.com/yatish1234546/DSA-Applications/blob/main/Readme.md#doubly-linked-list-examples)
+   3. [Circular Linked list](https://github.com/yatish1234546/DSA-Applications/blob/main/Readme.md#circular-linked-list-examples)
+4. [Application of Binary Search Trees](https://github.com/yatish1234546/DSA-Applications/blob/main/Readme.md#application-of-binary-search-trees)
+5. [Application of Hashing ](https://github.com/yatish1234546/DSA-Applications/blob/main/Readme.md#applications-of-hashing)
+6. [Application of Graphs ](https://github.com/yatish1234546/DSA-Applications/blob/main/Readme.md#applications-of-graphs)
+7. [Application of AVL ](https://github.com/yatish1234546/DSA-Applications/blob/main/Readme.md#applications-of-avl)**
 
 # Application of Queues
 
@@ -1658,8 +1667,6 @@ Explanation: A medical clinic can use a BST to organize patient medical records.
         return 0;
     }
 
-# ===============================================
-
 # Applications of Hashing
 
 ## Password Storage
@@ -1856,7 +1863,6 @@ Explanation: Hashing is used in distributed systems to assign keys to specific n
         return 0;
     }
 
-# ===============================================
 # Application of Graphs
 
 ## Social Network
@@ -2061,7 +2067,6 @@ Explanation: University courses and their prerequisites can be represented as a 
     
         return 0;
     }
-# ===========================================================
 
 # Applications of AVL
 
