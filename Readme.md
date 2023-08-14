@@ -364,8 +364,6 @@ Explanation: In a call center, incoming customer calls are placed in a queue and
         return 0;
     }
 
-# ==============================================================================================
-
 # Application of Stacks
 
 ## Plate Stack in a Cafeteria
@@ -614,14 +612,11 @@ Explanation: A browser's tab navigation can be implemented using a stack. Openin
         return 0;
     }
 
-# ==============================================================================================
 # Application of Linked Lists
 
-#### =======================================
-#### Singly Linked List Examples:
-#### =======================================
+## Singly Linked List Examples:
 
-## Employee List
+### Employee List
 
 Explanation: A list of employees in a company can be implemented using a singly linked list. Each employee is a node with details like name, ID, and position.
 
@@ -665,7 +660,7 @@ Explanation: A list of employees in a company can be implemented using a singly 
         return 0;
     }
 
-## Queue Implementation
+### Queue Implementation
 
 Explanation: A queue data structure can be implemented using a singly linked list. It follows the First-In-First-Out (FIFO) principle.
     
@@ -727,7 +722,7 @@ Explanation: A queue data structure can be implemented using a singly linked lis
         return 0;
     }
 
-## Student Record List
+### Student Record List
 
 Explanation: A list of student records with details like name, roll number, and marks can be implemented using a singly linked list.
     
@@ -771,7 +766,7 @@ Explanation: A list of student records with details like name, roll number, and 
         return 0;
     }
 
-## Shopping Cart
+### Shopping Cart
 
 Explanation: A shopping cart in an e-commerce application can be implemented using a singly linked list. Each item added to the cart is a node.
     
@@ -815,7 +810,7 @@ Explanation: A shopping cart in an e-commerce application can be implemented usi
         return 0;
     }
 
-## Sensor Data Log
+### Sensor Data Log
 
 Explanation: A log of sensor data readings with timestamps can be implemented using a singly linked list. Each reading is a node with details.
     
@@ -857,11 +852,9 @@ Explanation: A log of sensor data readings with timestamps can be implemented us
         return 0;
     }
 
-### =======================================
-### Doubly Linked List Examples:
-### =======================================
+## Doubly Linked List Examples:
 
-## Music Playlist
+### Music Playlist
 
 Explanation: A music playlist can be implemented using a doubly linked list. Each song is a node with details like title, artist, and references to previous and next songs.
     
@@ -911,7 +904,7 @@ Explanation: A music playlist can be implemented using a doubly linked list. Eac
     }
 
 
-## Undo/Redo History
+### Undo/Redo History
 
 Explanation: An application's undo/redo history can be implemented using a doubly linked list. Each state change is a node with references to previous and next states.
     
@@ -962,7 +955,7 @@ Explanation: An application's undo/redo history can be implemented using a doubl
         return 0;
     }
 
-## Text Editor Buffer
+### Text Editor Buffer
 
 Explanation: A text editor's undo/redo buffer can be implemented using a doubly linked list. Each text change is a node.
     
@@ -1014,7 +1007,7 @@ Explanation: A text editor's undo/redo buffer can be implemented using a doubly 
         return 0;
     }
 
-## History of Transactions:
+### History of Transactions:
 
 Explanation: A history of financial transactions can be implemented using a doubly linked list. Each transaction is a node with details like amount and references to previous and next transactions.
     
@@ -1060,7 +1053,7 @@ Explanation: A history of financial transactions can be implemented using a doub
         return 0;
     }
 
-## Undo/Redo Stack:
+### Undo/Redo Stack:
 
 Explanation: An undo/redo stack in a graphics application can be implemented using a doubly linked list. Each action is a node with references to previous and next actions.
     
@@ -1112,11 +1105,9 @@ Explanation: An undo/redo stack in a graphics application can be implemented usi
     }
 
 
-### ======================
-### Circular Linked List
-### =====================
+## Circular Linked List
 
-## Round-Robin Scheduling
+### Round-Robin Scheduling
 Explanation: In computer science, round-robin scheduling is a technique where tasks are assigned to processors in a circular manner. Each task gets a fixed time slice for execution before moving to the next task.
 
     #include <stdio.h>
@@ -1175,7 +1166,7 @@ Explanation: In computer science, round-robin scheduling is a technique where ta
         return 0;
     }
 
-## Music Playlist
+### Music Playlist
 
 Explanation: Circular linked lists can be used to create circular music playlists. Each song node points to the next song, and the last song points back to the first song.
 
@@ -1222,7 +1213,7 @@ Explanation: Circular linked lists can be used to create circular music playlist
         return 0;
     }
 
-## Circular Queue
+### Circular Queue
 
 Explanation: A circular queue is a queue data structure where the front and rear of the queue are connected, creating a circular structure. It's often used for managing a limited buffer.
 
@@ -1295,7 +1286,7 @@ Explanation: A circular queue is a queue data structure where the front and rear
         return 0;
     }
 
-## Circular Linked List for Memory Allocation
+### Circular Linked List for Memory Allocation
 
 Explanation: Circular linked lists can be used to manage memory allocation and deallocation in embedded systems where memory is limited and fragmentation is a concern.
 
@@ -1351,7 +1342,7 @@ Explanation: Circular linked lists can be used to manage memory allocation and d
         return 0;
     }
 
-## Circular Linked List for System Timer Events:
+### Circular Linked List for System Timer Events:
 Explanation: In embedded systems, a circular linked list can be used to manage scheduled events, such as system timer tasks, where events repeat after a certain interval.
 
     #include <stdio.h>
@@ -1406,7 +1397,6 @@ Explanation: In embedded systems, a circular linked list can be used to manage s
         
         return 0;
     }
-# ===============================================
 
 # Application of Binary Search Trees
 
