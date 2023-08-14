@@ -1111,6 +1111,559 @@ Explanation: An undo/redo stack in a graphics application can be implemented usi
         return 0;
     }
 
+
+### ======================
+### Circular Linked List
+### =====================
+
+## Round-Robin Scheduling
+Explanation: In computer science, round-robin scheduling is a technique where tasks are assigned to processors in a circular manner. Each task gets a fixed time slice for execution before moving to the next task.
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    
+    struct Process {
+    int id;
+    struct Process *next;
+    };
+    
+    struct Process *addToCircularList(struct Process *current, int processID) {
+    struct Process *newProcess = (struct Process *)malloc(sizeof(struct Process));
+    newProcess->id = processID;
+    
+        if (current == NULL) {
+            newProcess->next = newProcess; // Only one process in the list
+            return newProcess;
+        }
+        
+        newProcess->next = current->next;
+        current->next = newProcess;
+        
+        return newProcess;
+    }
+    
+    struct Process *removeFromCircularList(struct Process *current) {
+    if (current == NULL) {
+    return NULL;
+    }
+    
+        struct Process *removedProcess = current->next;
+        
+        if (current->next == current) {
+            free(current);
+            return NULL; // Last process in the list
+        }
+        
+        current->next = current->next->next;
+        free(removedProcess);
+        
+        return current->next;
+    }
+    
+    int main() {
+    struct Process *currentProcess = NULL;
+    
+        currentProcess = addToCircularList(currentProcess, 1);
+        currentProcess = addToCircularList(currentProcess, 2);
+        currentProcess = addToCircularList(currentProcess, 3);
+        
+        for (int i = 0; i < 6; i++) {
+            printf("Executing process: %d\n", currentProcess->id);
+            currentProcess = currentProcess->next;
+        }
+        
+        return 0;
+    }
+
+## Music Playlist
+
+Explanation: Circular linked lists can be used to create circular music playlists. Each song node points to the next song, and the last song points back to the first song.
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    
+    struct Song {
+    char title[100];
+    struct Song *next;
+    };
+    
+    struct Song *addToPlaylist(struct Song *current, const char title[]) {
+    struct Song *newSong = (struct Song *)malloc(sizeof(struct Song));
+    strcpy(newSong->title, title);
+    
+        if (current == NULL) {
+            newSong->next = newSong; // Only one song in the playlist
+            return newSong;
+        }
+        
+        newSong->next = current->next;
+        current->next = newSong;
+        
+        return newSong;
+    }
+    
+    void playPlaylist(struct Song *currentSong, int numSongs) {
+    for (int i = 0; i < numSongs; i++) {
+    printf("Now playing: %s\n", currentSong->title);
+    currentSong = currentSong->next;
+    }
+    }
+    
+    int main() {
+    struct Song *currentSong = NULL;
+    
+        currentSong = addToPlaylist(currentSong, "Song 1");
+        currentSong = addToPlaylist(currentSong, "Song 2");
+        currentSong = addToPlaylist(currentSong, "Song 3");
+        
+        playPlaylist(currentSong, 5);
+        
+        return 0;
+    }
+
+## Circular Queue
+
+Explanation: A circular queue is a queue data structure where the front and rear of the queue are connected, creating a circular structure. It's often used for managing a limited buffer.
+
+    #include <stdio.h>
+    #include <stdbool.h>
+    
+    #define MAX_QUEUE_SIZE 5
+    
+    struct CircularQueue {
+    int items[MAX_QUEUE_SIZE];
+    int front;
+    int rear;
+    };
+    
+    void initializeCircularQueue(struct CircularQueue *queue) {
+    queue->front = -1;
+    queue->rear = -1;
+    }
+    
+    bool isCircularQueueEmpty(struct CircularQueue *queue) {
+    return queue->front == -1;
+    }
+    
+    bool isCircularQueueFull(struct CircularQueue *queue) {
+    return (queue->rear + 1) % MAX_QUEUE_SIZE == queue->front;
+    }
+    
+    void enqueue(struct CircularQueue *queue, int value) {
+    if (isCircularQueueFull(queue)) {
+    printf("Circular queue is full. Cannot enqueue.\n");
+    return;
+    }
+    if (isCircularQueueEmpty(queue)) {
+    queue->front = 0;
+    }
+    queue->rear = (queue->rear + 1) % MAX_QUEUE_SIZE;
+    queue->items[queue->rear] = value;
+    }
+    
+    int dequeue(struct CircularQueue *queue) {
+    if (isCircularQueueEmpty(queue)) {
+    printf("Circular queue is empty. Cannot dequeue.\n");
+    return -1;
+    }
+    int value = queue->items[queue->front];
+    if (queue->front == queue->rear) {
+    queue->front = -1;
+    queue->rear = -1;
+    } else {
+    queue->front = (queue->front + 1) % MAX_QUEUE_SIZE;
+    }
+    return value;
+    }
+    
+    int main() {
+    struct CircularQueue cQueue;
+    initializeCircularQueue(&cQueue);
+    
+        enqueue(&cQueue, 1);
+        enqueue(&cQueue, 2);
+        enqueue(&cQueue, 3);
+        enqueue(&cQueue, 4);
+    
+        int dequeuedValue = dequeue(&cQueue);
+        printf("Dequeued value: %d\n", dequeuedValue);
+    
+        enqueue(&cQueue, 5);
+        enqueue(&cQueue, 6);
+    
+        return 0;
+    }
+
+## Circular Linked List for Memory Allocation
+
+Explanation: Circular linked lists can be used to manage memory allocation and deallocation in embedded systems where memory is limited and fragmentation is a concern.
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    
+    struct MemoryBlock {
+    int size;
+    struct MemoryBlock *next;
+    };
+    
+    struct MemoryBlock *allocateMemory(struct MemoryBlock *current, int blockSize) {
+    struct MemoryBlock *newBlock = (struct MemoryBlock *)malloc(sizeof(struct MemoryBlock));
+    newBlock->size = blockSize;
+    
+        if (current == NULL) {
+            newBlock->next = newBlock; // Only one block in the list
+            return newBlock;
+        }
+        
+        newBlock->next = current->next;
+        current->next = newBlock;
+        
+        return newBlock;
+    }
+    
+    void deallocateMemory(struct MemoryBlock *current) {
+    if (current == NULL) {
+    return;
+    }
+    
+        struct MemoryBlock *temp = current->next;
+        
+        if (current->next == current) {
+            free(current);
+            return; // Last block in the list
+        }
+        
+        current->next = current->next->next;
+        free(temp);
+    }
+    
+    int main() {
+    struct MemoryBlock *memoryList = NULL;
+    
+        memoryList = allocateMemory(memoryList, 100);
+        memoryList = allocateMemory(memoryList, 200);
+        memoryList = allocateMemory(memoryList, 150);
+        
+        deallocateMemory(memoryList);
+        deallocateMemory(memoryList->next);
+        
+        return 0;
+    }
+
+## Circular Linked List for System Timer Events:
+Explanation: In embedded systems, a circular linked list can be used to manage scheduled events, such as system timer tasks, where events repeat after a certain interval.
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    
+    struct TimerEvent {
+    int interval;
+    void (*callback)(void);
+    struct TimerEvent *next;
+    };
+    
+    void eventCallback1() {
+    printf("Event 1 occurred\n");
+    }
+    
+    void eventCallback2() {
+    printf("Event 2 occurred\n");
+    }
+    
+    struct TimerEvent *scheduleEvent(struct TimerEvent *current, int interval, void (*callback)(void)) {
+    struct TimerEvent *newEvent = (struct TimerEvent *)malloc(sizeof(struct TimerEvent));
+    newEvent->interval = interval;
+    newEvent->callback = callback;
+    
+        if (current == NULL) {
+            newEvent->next = newEvent; // Only one event in the list
+            return newEvent;
+        }
+        
+        newEvent->next = current->next;
+        current->next = newEvent;
+        
+        return newEvent;
+    }
+    
+    void processEvents(struct TimerEvent *currentEvent) {
+    while (1) {
+    currentEvent->callback();
+    currentEvent = currentEvent->next;
+    // Simulate delay or sleep based on the interval
+    printf("Waiting...\n");
+    }
+    }
+    
+    int main() {
+    struct TimerEvent *eventList = NULL;
+    
+        eventList = scheduleEvent(eventList, 1000, eventCallback1);
+        eventList = scheduleEvent(eventList, 2000, eventCallback2);
+        
+        processEvents(eventList);
+        
+        return 0;
+    }
+# ===============================================
+
+# Application of Binary Search Trees
+
+## Stock Price Tracking:
+Explanation: A binary search tree can be used to track historical stock prices. Each node represents a date, and the left subtree contains dates before the current node's date, while the right subtree contains dates after.
+    
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    
+    struct StockPrice {
+    char date[20];
+    double price;
+    struct StockPrice *left;
+    struct StockPrice *right;
+    };
+    
+    struct StockPrice *createStockPrice(const char *date, double price) {
+    struct StockPrice *newPrice = (struct StockPrice *)malloc(sizeof(struct StockPrice));
+    strcpy(newPrice->date, date);
+    newPrice->price = price;
+    newPrice->left = NULL;
+    newPrice->right = NULL;
+    return newPrice;
+    }
+    
+    struct StockPrice *insertPrice(struct StockPrice *root, const char *date, double price) {
+    if (root == NULL) {
+    return createStockPrice(date, price);
+    }
+    int compareResult = strcmp(date, root->date);
+    if (compareResult < 0) {
+    root->left = insertPrice(root->left, date, price);
+    } else if (compareResult > 0) {
+    root->right = insertPrice(root->right, date, price);
+    }
+    return root;
+    }
+    
+    int main() {
+    struct StockPrice *priceHistory = NULL;
+    
+        priceHistory = insertPrice(priceHistory, "2023-08-01", 150.25);
+        priceHistory = insertPrice(priceHistory, "2023-08-02", 155.10);
+        priceHistory = insertPrice(priceHistory, "2023-08-03", 157.50);
+    
+        // Tree representation:
+        //       2023-08-01
+        //             \
+        //       2023-08-02
+        //             \
+        //       2023-08-03
+    
+        return 0;
+    }
+
+## Automated Car Parking System:
+
+Explanation: A parking system can use a BST to efficiently manage parking spots. Each node represents a parking spot, and the left subtree contains available spots, while the right subtree contains occupied spots.
+    
+    #include <stdio.h>
+    #include <stdlib.h>
+    
+    struct ParkingSpot {
+    int spotNumber;
+    char status; // 'A' for available, 'O' for occupied
+    struct ParkingSpot *left;
+    struct ParkingSpot *right;
+    };
+    
+    struct ParkingSpot *createParkingSpot(int spotNumber, char status) {
+    struct ParkingSpot *newSpot = (struct ParkingSpot *)malloc(sizeof(struct ParkingSpot));
+    newSpot->spotNumber = spotNumber;
+    newSpot->status = status;
+    newSpot->left = NULL;
+    newSpot->right = NULL;
+    return newSpot;
+    }
+    
+    struct ParkingSpot *insertSpot(struct ParkingSpot *root, int spotNumber, char status) {
+    if (root == NULL) {
+    return createParkingSpot(spotNumber, status);
+    }
+    if (status == 'A') {
+    root->left = insertSpot(root->left, spotNumber, status);
+    } else if (status == 'O') {
+    root->right = insertSpot(root->right, spotNumber, status);
+    }
+    return root;
+    }
+    
+    int main() {
+    struct ParkingSpot *parkingMap = NULL;
+    
+        parkingMap = insertSpot(parkingMap, 101, 'A');
+        parkingMap = insertSpot(parkingMap, 102, 'O');
+        parkingMap = insertSpot(parkingMap, 103, 'A');
+    
+        // Tree representation:
+        //          101 (A)
+        //            / \
+        //      102 (O)  103 (A)
+    
+        return 0;
+    }
+
+## Flight Booking System:
+
+Explanation: A flight booking system can utilize a BST to organize available flight seats. Each node represents a seat, and the left subtree contains available seats, while the right subtree contains booked seats.
+    
+    #include <stdio.h>
+    #include <stdlib.h>
+    
+    struct FlightSeat {
+    int seatNumber;
+    char status; // 'A' for available, 'B' for booked
+    struct FlightSeat *left;
+    struct FlightSeat *right;
+    };
+    
+    struct FlightSeat *createFlightSeat(int seatNumber, char status) {
+    struct FlightSeat *newSeat = (struct FlightSeat *)malloc(sizeof(struct FlightSeat));
+    newSeat->seatNumber = seatNumber;
+    newSeat->status = status;
+    newSeat->left = NULL;
+    newSeat->right = NULL;
+    return newSeat;
+    }
+    
+    struct FlightSeat *insertSeat(struct FlightSeat *root, int seatNumber, char status) {
+    if (root == NULL) {
+    return createFlightSeat(seatNumber, status);
+    }
+    if (status == 'A') {
+    root->left = insertSeat(root->left, seatNumber, status);
+    } else if (status == 'B') {
+    root->right = insertSeat(root->right, seatNumber, status);
+    }
+    return root;
+    }
+    
+    int main() {
+    struct FlightSeat *seatMap = NULL;
+    
+        seatMap = insertSeat(seatMap, 1, 'A');
+        seatMap = insertSeat(seatMap, 2, 'B');
+        seatMap = insertSeat(seatMap, 3, 'A');
+    
+        // Tree representation:
+        //          1 (A)
+        //            / \
+        //      2 (B)  3 (A)
+    
+        return 0;
+    }
+
+## Online Course Enrollment:
+
+Explanation: An online learning platform can use a BST to manage course enrollments. Each node represents a course, and the left subtree contains available courses, while the right subtree contains enrolled courses.
+    
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    
+    struct Course {
+    char courseCode[10];
+    char status; // 'A' for available, 'E' for enrolled
+    struct Course *left;
+    struct Course *right;
+    };
+    
+    struct Course *createCourse(const char *courseCode, char status) {
+    struct Course *newCourse = (struct Course *)malloc(sizeof(struct Course));
+    strcpy(newCourse->courseCode, courseCode);
+    newCourse->status = status;
+    newCourse->left = NULL;
+    newCourse->right = NULL;
+    return newCourse;
+    }
+    
+    struct Course *insertCourse(struct Course *root, const char *courseCode, char status) {
+    if (root == NULL) {
+    return createCourse(courseCode, status);
+    }
+    if (status == 'A') {
+    root->left = insertCourse(root->left, courseCode, status);
+    } else if (status == 'E') {
+    root->right = insertCourse(root->right, courseCode, status);
+    }
+    return root;
+    }
+    
+    int main() {
+    struct Course *courseCatalog = NULL;
+    
+        courseCatalog = insertCourse(courseCatalog, "CSCI101", 'A');
+        courseCatalog = insertCourse(courseCatalog, "MATH202", 'E');
+        courseCatalog = insertCourse(courseCatalog, "PHYS301", 'A');
+    
+        // Tree representation:
+        //       CSCI101 (A)
+        //            / \
+        //    MATH202 (E)  PHYS301 (A)
+    
+        return 0;
+    }
+
+## Medical Records:
+
+Explanation: A medical clinic can use a BST to organize patient medical records. Each node represents a patient's record, and the left subtree contains records of patients with lower medical IDs, while the right subtree contains records of patients with higher IDs.
+    
+    #include <stdio.h>
+    #include <stdlib.h>
+    
+    struct MedicalRecord {
+    int patientID;
+    char diagnosis[100];
+    struct MedicalRecord *left;
+    struct MedicalRecord *right;
+    };
+    
+    struct MedicalRecord *createMedicalRecord(int patientID, const char *diagnosis) {
+    struct MedicalRecord *newRecord = (struct MedicalRecord *)malloc(sizeof(struct MedicalRecord));
+    newRecord->patientID = patientID;
+    strcpy(newRecord->diagnosis, diagnosis);
+    newRecord->left = NULL;
+    newRecord->right = NULL;
+    return newRecord;
+    }
+    
+    struct MedicalRecord *insertRecord(struct MedicalRecord *root, int patientID, const char *diagnosis) {
+    if (root == NULL) {
+    return createMedicalRecord(patientID, diagnosis);
+    }
+    if (patientID < root->patientID) {
+    root->left = insertRecord(root->left, patientID, diagnosis);
+    } else if (patientID > root->patientID) {
+    root->right = insertRecord(root->right, patientID, diagnosis);
+    }
+    return root;
+    }
+    
+    int main() {
+    struct MedicalRecord *patientRecords = NULL;
+    
+        patientRecords = insertRecord(patientRecords, 101, "Fever");
+        patientRecords = insertRecord(patientRecords, 102, "Fracture");
+        patientRecords = insertRecord(patientRecords, 103, "Cold");
+    
+        // Tree representation:
+        //         101
+        //         /   \
+        //      102   103
+    
+        return 0;
+    }
+
 # ===============================================
 
 # Applications of Hashing
@@ -1511,6 +2064,617 @@ Explanation: University courses and their prerequisites can be represented as a 
         addPrerequisite(1, 2);  // Course B has a prerequisite of Course C
     
         // Graph representation: Course A -> Course B -> Course C
+    
+        return 0;
+    }
+# ===========================================================
+
+# Applications of AVL
+
+## Databases and Indexing:
+
+Explanation: In databases, AVL trees can be used to maintain indexes for efficient data retrieval. Each node in the AVL tree represents a unique key (e.g., a primary key) and points to the corresponding data. This allows for quick search operations based on the key values.
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    
+    struct AVLNode {
+    int key;
+    struct AVLNode *left;
+    struct AVLNode *right;
+    int height;
+    };
+    
+    int max(int a, int b) {
+    return (a > b) ? a : b;
+    }
+    
+    int height(struct AVLNode *node) {
+    if (node == NULL)
+    return -1;
+    return node->height;
+    }
+    
+    int getBalance(struct AVLNode *node) {
+    if (node == NULL)
+    return 0;
+    return height(node->left) - height(node->right);
+    }
+    
+    struct AVLNode *rotateRight(struct AVLNode *y) {
+    struct AVLNode *x = y->left;
+    struct AVLNode *T2 = x->right;
+    
+        x->right = y;
+        y->left = T2;
+    
+        y->height = 1 + max(height(y->left), height(y->right));
+        x->height = 1 + max(height(x->left), height(x->right));
+    
+        return x;
+    }
+    
+    struct AVLNode *rotateLeft(struct AVLNode *x) {
+    struct AVLNode *y = x->right;
+    struct AVLNode *T2 = y->left;
+    
+        y->left = x;
+        x->right = T2;
+    
+        x->height = 1 + max(height(x->left), height(x->right));
+        y->height = 1 + max(height(y->left), height(y->right));
+    
+        return y;
+    }
+    
+    struct AVLNode *insert(struct AVLNode *node, int key) {
+    if (node == NULL) {
+    struct AVLNode *newNode = (struct AVLNode *)malloc(sizeof(struct AVLNode));
+    newNode->key = key;
+    newNode->height = 0;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+    }
+    
+        if (key < node->key)
+            node->left = insert(node->left, key);
+        else if (key > node->key)
+            node->right = insert(node->right, key);
+        else
+            return node;
+    
+        node->height = 1 + max(height(node->left), height(node->right));
+    
+        int balance = getBalance(node);
+    
+        if (balance > 1 && key < node->left->key)
+            return rotateRight(node);
+    
+        if (balance < -1 && key > node->right->key)
+            return rotateLeft(node);
+    
+        if (balance > 1 && key > node->left->key) {
+            node->left = rotateLeft(node->left);
+            return rotateRight(node);
+        }
+    
+        if (balance < -1 && key < node->right->key) {
+            node->right = rotateRight(node->right);
+            return rotateLeft(node);
+        }
+    
+        return node;
+    }
+    
+    void inorderTraversal(struct AVLNode *root) {
+    if (root != NULL) {
+    inorderTraversal(root->left);
+    printf("%d ", root->key);
+    inorderTraversal(root->right);
+    }
+    }
+    
+    int main() {
+    struct AVLNode *root = NULL;
+    
+        root = insert(root, 10);
+        root = insert(root, 20);
+        root = insert(root, 30);
+    
+        inorderTraversal(root);
+    
+        return 0;
+    }
+
+## Auto-Completion and Spell Checkers:
+
+Explanation: In auto-completion and spell checkers, AVL trees can store a dictionary of words. This allows for efficient word lookup, suggestion generation, and correction of misspelled words.
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    
+    struct AVLNode {
+    char word[50];
+    int frequency;
+    struct AVLNode *left;
+    struct AVLNode *right;
+    int height;
+    };
+    
+    int max(int a, int b) {
+    return (a > b) ? a : b;
+    }
+    
+    int height(struct AVLNode *node) {
+    if (node == NULL)
+    return -1;
+    return node->height;
+    }
+    
+    int getBalance(struct AVLNode *node) {
+    if (node == NULL)
+    return 0;
+    return height(node->left) - height(node->right);
+    }
+    
+    struct AVLNode *rotateRight(struct AVLNode *y) {
+    struct AVLNode *x = y->left;
+    struct AVLNode *T2 = x->right;
+    
+        x->right = y;
+        y->left = T2;
+    
+        y->height = 1 + max(height(y->left), height(y->right));
+        x->height = 1 + max(height(x->left), height(x->right));
+    
+        return x;
+    }
+    
+    struct AVLNode *rotateLeft(struct AVLNode *x) {
+    struct AVLNode *y = x->right;
+    struct AVLNode *T2 = y->left;
+    
+        y->left = x;
+        x->right = T2;
+    
+        x->height = 1 + max(height(x->left), height(x->right));
+        y->height = 1 + max(height(y->left), height(y->right));
+    
+        return y;
+    }
+    
+    struct AVLNode *insert(struct AVLNode *node, const char *word) {
+    if (node == NULL) {
+    struct AVLNode *newNode = (struct AVLNode *)malloc(sizeof(struct AVLNode));
+    strcpy(newNode->word, word);
+    newNode->frequency = 1;
+    newNode->height = 0;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+    }
+    
+        int cmp = strcmp(word, node->word);
+    
+        if (cmp < 0)
+            node->left = insert(node->left, word);
+        else if (cmp > 0)
+            node->right = insert(node->right, word);
+        else {
+            node->frequency++;
+            return node;
+        }
+    
+        node->height = 1 + max(height(node->left), height(node->right));
+    
+        int balance = getBalance(node);
+    
+        if (balance > 1 && strcmp(word, node->left->word) < 0)
+            return rotateRight(node);
+    
+        if (balance < -1 && strcmp(word, node->right->word) > 0)
+            return rotateLeft(node);
+    
+        if (balance > 1 && strcmp(word, node->left->word) > 0) {
+            node->left = rotateLeft(node->left);
+            return rotateRight(node);
+        }
+    
+        if (balance < -1 && strcmp(word, node->right->word) < 0) {
+            node->right = rotateRight(node->right);
+            return rotateLeft(node);
+        }
+    
+        return node;
+    }
+    
+    void inorderTraversal(struct AVLNode *root) {
+    if (root != NULL) {
+    inorderTraversal(root->left);
+    printf("%s (%d)\n", root->word, root->frequency);
+    inorderTraversal(root->right);
+    }
+    }
+    
+    int main() {
+    struct AVLNode *root = NULL;
+    
+        root = insert(root, "auto");
+        root = insert(root, "auto");
+        root = insert(root, "completion");
+        root = insert(root, "checker");
+    
+        inorderTraversal(root);
+    
+        return 0;
+    }
+
+## Processing and Syntax Analysis:
+
+Explanation: In language processing and syntax analysis, AVL trees can store grammar rules, keywords, or syntax patterns. This helps in efficient parsing and analyzing of code or text.
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    
+    struct AVLNode {
+    char syntaxRule[100];
+    struct AVLNode *left;
+    struct AVLNode *right;
+    int height;
+    };
+    
+    int max(int a, int b) {
+    return (a > b) ? a : b;
+    }
+    
+    int height(struct AVLNode *node) {
+    if (node == NULL)
+    return -1;
+    return node->height;
+    }
+    
+    int getBalance(struct AVLNode *node) {
+    if (node == NULL)
+    return 0;
+    return height(node->left) - height(node->right);
+    }
+    
+    struct AVLNode *rotateRight(struct AVLNode *y) {
+    struct AVLNode *x = y->left;
+    struct AVLNode *T2 = x->right;
+    
+        x->right = y;
+        y->left = T2;
+    
+        y->height = 1 + max(height(y->left), height(y->right));
+        x->height = 1 + max(height(x->left), height(x->right));
+    
+        return x;
+    }
+    
+    struct AVLNode *rotateLeft(struct AVLNode *x) {
+    struct AVLNode *y = x->right;
+    struct AVLNode *T2 = y->left;
+    
+        y->left = x;
+        x->right = T2;
+    
+        x->height = 1 + max(height(x->left), height(x->right));
+        y->height = 1 + max(height(y->left), height(y->right));
+    
+        return y;
+    }
+    
+    struct AVLNode *insert(struct AVLNode *node, const char *syntaxRule) {
+    if (node == NULL) {
+    struct AVLNode *newNode = (struct AVLNode *)malloc(sizeof(struct AVLNode));
+    strcpy(newNode->syntaxRule, syntaxRule);
+    newNode->height = 0;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+    }
+    
+        int cmp = strcmp(syntaxRule, node->syntaxRule);
+    
+        if (cmp < 0)
+            node->left = insert(node->left, syntaxRule);
+        else if (cmp > 0)
+            node->right = insert(node->right, syntaxRule);
+        else
+            return node;
+    
+        node->height = 1 + max(height(node->left), height(node->right));
+    
+        int balance = getBalance(node);
+    
+        if (balance > 1 && strcmp(syntaxRule, node->left->syntaxRule) < 0)
+            return rotateRight(node);
+    
+        if (balance < -1 && strcmp(syntaxRule, node->right->syntaxRule) > 0)
+            return rotateLeft(node);
+    
+        if (balance > 1 && strcmp(syntaxRule, node->left->syntaxRule) > 0) {
+            node->left = rotateLeft(node->left);
+            return rotateRight(node);
+        }
+    
+        if (balance < -1 && strcmp(syntaxRule, node->right->syntaxRule) < 0) {
+            node->right = rotateRight(node->right);
+            return rotateLeft(node);
+        }
+    
+        return node;
+    }
+    
+    void inorderTraversal(struct AVLNode *root) {
+    if (root != NULL) {
+    inorderTraversal(root->left);
+    printf("%s\n", root->syntaxRule);
+    inorderTraversal(root->right);
+    }
+    }
+    
+    int main() {
+    struct AVLNode *root = NULL;
+    
+        root = insert(root, "variable declaration");
+        root = insert(root, "loop statement");
+        root = insert(root, "function call");
+        root = insert(root, "conditional statement");
+    
+        inorderTraversal(root);
+    
+        return 0;
+    }
+
+## Financial Software and Market Analysis:
+
+Explanation: In financial software, AVL trees can be used to store financial instruments (e.g., stocks) along with their associated data. This enables efficient data retrieval and analysis for market trends.
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    
+    struct AVLNode {
+    char stockName[50];
+    double price;
+    struct AVLNode *left;
+    struct AVLNode *right;
+    int height;
+    };
+    
+    int max(int a, int b) {
+    return (a > b) ? a : b;
+    }
+    
+    int height(struct AVLNode *node) {
+    if (node == NULL)
+    return -1;
+    return node->height;
+    }
+    
+    int getBalance(struct AVLNode *node) {
+    if (node == NULL)
+    return 0;
+    return height(node->left) - height(node->right);
+    }
+    
+    struct AVLNode *rotateRight(struct AVLNode *y) {
+    struct AVLNode *x = y->left;
+    struct AVLNode *T2 = x->right;
+    
+        x->right = y;
+        y->left = T2;
+    
+        y->height = 1 + max(height(y->left), height(y->right));
+        x->height = 1 + max(height(x->left), height(x->right));
+    
+        return x;
+    }
+    
+    struct AVLNode *rotateLeft(struct AVLNode *x) {
+    struct AVLNode *y = x->right;
+    struct AVLNode *T2 = y->left;
+    
+        y->left = x;
+        x->right = T2;
+    
+        x->height = 1 + max(height(x->left), height(x->right));
+        y->height = 1 + max(height(y->left), height(y->right));
+    
+        return y;
+    }
+    
+    struct AVLNode *insert(struct AVLNode *node, const char *stockName, double price) {
+    if (node == NULL) {
+    struct AVLNode *newNode = (struct AVLNode *)malloc(sizeof(struct AVLNode));
+    strcpy(newNode->stockName, stockName);
+    newNode->price = price;
+    newNode->height = 0;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+    }
+    
+        int cmp = strcmp(stockName, node->stockName);
+    
+        if (cmp < 0)
+            node->left = insert(node->left, stockName, price);
+        else if (cmp > 0)
+            node->right = insert(node->right, stockName, price);
+        else
+            return node;
+    
+        node->height = 1 + max(height(node->left), height(node->right));
+    
+        int balance = getBalance(node);
+    
+        if (balance > 1 && strcmp(stockName, node->left->stockName) < 0)
+            return rotateRight(node);
+    
+        if (balance < -1 && strcmp(stockName, node->right->stockName) > 0)
+            return rotateLeft(node);
+    
+        if (balance > 1 && strcmp(stockName, node->left->stockName) > 0) {
+            node->left = rotateLeft(node->left);
+            return rotateRight(node);
+        }
+    
+        if (balance < -1 && strcmp(stockName, node->right->stockName) < 0) {
+            node->right = rotateRight(node->right);
+            return rotateLeft(node);
+        }
+    
+        return node;
+    }
+    
+    void inorderTraversal(struct AVLNode *root) {
+    if (root != NULL) {
+    inorderTraversal(root->left);
+    printf("%s - %.2f\n", root->stockName, root->price);
+    inorderTraversal(root->right);
+    }
+    }
+    
+    int main() {
+    struct AVLNode *root = NULL;
+    
+        root = insert(root, "AAPL", 150.50);
+        root = insert(root, "GOOGL", 2700.20);
+        root = insert(root, "AMZN", 3500.75);
+        root = insert(root, "MSFT", 260.90);
+    
+        inorderTraversal(root);
+    
+        return 0;
+    }
+
+## Online Gaming:
+
+Explanation: In online gaming, AVL trees can be used to maintain leaderboards and player scores. This allows for quick updates and retrieval of high scores.
+    
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    
+    struct AVLNode {
+    char playerName[50];
+    int score;
+    struct AVLNode *left;
+    struct AVLNode *right;
+    int height;
+    };
+    
+    int max(int a, int b) {
+    return (a > b) ? a : b;
+    }
+    
+    int height(struct AVLNode *node) {
+    if (node == NULL)
+    return -1;
+    return node->height;
+    }
+    
+    int getBalance(struct AVLNode *node) {
+    if (node == NULL)
+    return 0;
+    return height(node->left) - height(node->right);
+    }
+    
+    struct AVLNode *rotateRight(struct AVLNode *y) {
+    struct AVLNode *x = y->left;
+    struct AVLNode *T2 = x->right;
+    
+        x->right = y;
+        y->left = T2;
+    
+        y->height = 1 + max(height(y->left), height(y->right));
+        x->height = 1 + max(height(x->left), height(x->right));
+    
+        return x;
+    }
+    
+    struct AVLNode *rotateLeft(struct AVLNode *x) {
+    struct AVLNode *y = x->right;
+    struct AVLNode *T2 = y->left;
+    
+        y->left = x;
+        x->right = T2;
+    
+        x->height = 1 + max(height(x->left), height(x->right));
+        y->height = 1 + max(height(y->left), height(y->right));
+    
+        return y;
+    }
+    
+    struct AVLNode *insert(struct AVLNode *node, const char *playerName, int score) {
+    if (node == NULL) {
+    struct AVLNode *newNode = (struct AVLNode *)malloc(sizeof(struct AVLNode));
+    strcpy(newNode->playerName, playerName);
+    newNode->score = score;
+    newNode->height = 0;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+    }
+    
+        int cmp = strcmp(playerName, node->playerName);
+    
+        if (cmp < 0)
+            node->left = insert(node->left, playerName, score);
+        else if (cmp > 0)
+            node->right = insert(node->right, playerName, score);
+        else {
+            // Update score if player already exists
+            if (score > node->score)
+                node->score = score;
+            return node;
+        }
+    
+        node->height = 1 + max(height(node->left), height(node->right));
+    
+        int balance = getBalance(node);
+    
+        if (balance > 1 && strcmp(playerName, node->left->playerName) < 0)
+            return rotateRight(node);
+    
+        if (balance < -1 && strcmp(playerName, node->right->playerName) > 0)
+            return rotateLeft(node);
+    
+        if (balance > 1 && strcmp(playerName, node->left->playerName) > 0) {
+            node->left = rotateLeft(node->left);
+            return rotateRight(node);
+        }
+    
+        if (balance < -1 && strcmp(playerName, node->right->playerName) < 0) {
+            node->right = rotateRight(node->right);
+            return rotateLeft(node);
+        }
+    
+        return node;
+    }
+    
+    void inorderTraversal(struct AVLNode *root) {
+    if (root != NULL) {
+    inorderTraversal(root->left);
+    printf("%s - %d\n", root->playerName, root->score);
+    inorderTraversal(root->right);
+    }
+    }
+    
+    int main() {
+    struct AVLNode *root = NULL;
+    
+        root = insert(root, "Player1", 1000);
+        root = insert(root, "Player2", 850);
+        root = insert(root, "Player3", 1200);
+        root = insert(root, "Player4", 1100);
+    
+        inorderTraversal(root);
     
         return 0;
     }
