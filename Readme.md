@@ -1,3 +1,7 @@
+# DSA And Applications
+## https://github.com/yatish1234546/DSA-Applications/blob/main/Readme.md#supermarket-checkout-queue
+
+
 # Application of Queues
 
 ## Supermarket Checkout Queue
