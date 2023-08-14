@@ -1,8 +1,12 @@
+# DSA and its Applications
+
+### [Application of Queues ](https://github.com/yatish1234546/DSA-Applications/blob/main/Readme.md#application-of-queues)
+
 # Application of Queues
 
 ## Supermarket Checkout Queue
 Explanation: In a supermarket, customers wait in a queue at the checkout counter. The first customer to arrive is the first to be served.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     
@@ -75,7 +79,7 @@ Explanation: In a supermarket, customers wait in a queue at the checkout counter
 ## Print Queue
 
 Explanation: In a printer system, print jobs are placed in a queue. The printer processes the print jobs in the order they were added to the queue.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     
@@ -368,7 +372,7 @@ Explanation: In a call center, incoming customer calls are placed in a queue and
 
 ## Plate Stack in a Cafeteria
 Explanation: When plates are stacked in a cafeteria, the last plate that's placed becomes the first one to be used.
-    
+
     #include <stdio.h>
     #include <stdbool.h>
     
@@ -421,7 +425,7 @@ Explanation: When plates are stacked in a cafeteria, the last plate that's place
 ## Browser Back Button History
 
 Explanation: When you navigate through web pages using the back button in your browser, each page you visit is added to a stack. Pressing the back button pops the most recent page from the stack.
-    
+
     #include <stdio.h>
     #include <stdbool.h>
     #include <string.h>
@@ -476,7 +480,7 @@ Explanation: When you navigate through web pages using the back button in your b
 ## Undo/Redo Functionality in Text Editors
 
 Explanation: Text editors often use a stack to implement undo and redo functionality. Every text change is added to the undo stack, and pressing the undo button pops changes from the stack.
-    
+
     #include <stdio.h>
     #include <stdbool.h>
     #include <string.h>
@@ -531,7 +535,7 @@ Explanation: Text editors often use a stack to implement undo and redo functiona
 
 Explanation: When functions are called in a program, their execution is added to a call stack. The most recently called function's execution is completed before moving to the previous one.
 
-    
+
     #include <stdio.h>
     
     void functionA() {
@@ -557,7 +561,7 @@ Explanation: When functions are called in a program, their execution is added to
 
 ## Browser Tabs (Tab Stack)
 Explanation: A browser's tab navigation can be implemented using a stack. Opening a new tab pushes its information onto the stack, and closing a tab pops its information from the stack.
-    
+
     #include <stdio.h>
     #include <stdbool.h>
     #include <string.h>
@@ -663,7 +667,7 @@ Explanation: A list of employees in a company can be implemented using a singly 
 ### Queue Implementation
 
 Explanation: A queue data structure can be implemented using a singly linked list. It follows the First-In-First-Out (FIFO) principle.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     
@@ -725,7 +729,7 @@ Explanation: A queue data structure can be implemented using a singly linked lis
 ### Student Record List
 
 Explanation: A list of student records with details like name, roll number, and marks can be implemented using a singly linked list.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
@@ -769,7 +773,7 @@ Explanation: A list of student records with details like name, roll number, and 
 ### Shopping Cart
 
 Explanation: A shopping cart in an e-commerce application can be implemented using a singly linked list. Each item added to the cart is a node.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
@@ -813,7 +817,7 @@ Explanation: A shopping cart in an e-commerce application can be implemented usi
 ### Sensor Data Log
 
 Explanation: A log of sensor data readings with timestamps can be implemented using a singly linked list. Each reading is a node with details.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
@@ -857,7 +861,7 @@ Explanation: A log of sensor data readings with timestamps can be implemented us
 ### Music Playlist
 
 Explanation: A music playlist can be implemented using a doubly linked list. Each song is a node with details like title, artist, and references to previous and next songs.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
@@ -907,7 +911,7 @@ Explanation: A music playlist can be implemented using a doubly linked list. Eac
 ### Undo/Redo History
 
 Explanation: An application's undo/redo history can be implemented using a doubly linked list. Each state change is a node with references to previous and next states.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     
@@ -958,7 +962,7 @@ Explanation: An application's undo/redo history can be implemented using a doubl
 ### Text Editor Buffer
 
 Explanation: A text editor's undo/redo buffer can be implemented using a doubly linked list. Each text change is a node.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
@@ -1010,7 +1014,7 @@ Explanation: A text editor's undo/redo buffer can be implemented using a doubly 
 ### History of Transactions:
 
 Explanation: A history of financial transactions can be implemented using a doubly linked list. Each transaction is a node with details like amount and references to previous and next transactions.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     
@@ -1056,7 +1060,7 @@ Explanation: A history of financial transactions can be implemented using a doub
 ### Undo/Redo Stack:
 
 Explanation: An undo/redo stack in a graphics application can be implemented using a doubly linked list. Each action is a node with references to previous and next actions.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     
@@ -1402,7 +1406,7 @@ Explanation: In embedded systems, a circular linked list can be used to manage s
 
 ## Stock Price Tracking:
 Explanation: A binary search tree can be used to track historical stock prices. Each node represents a date, and the left subtree contains dates before the current node's date, while the right subtree contains dates after.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
@@ -1456,7 +1460,7 @@ Explanation: A binary search tree can be used to track historical stock prices. 
 ## Automated Car Parking System:
 
 Explanation: A parking system can use a BST to efficiently manage parking spots. Each node represents a parking spot, and the left subtree contains available spots, while the right subtree contains occupied spots.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     
@@ -1506,7 +1510,7 @@ Explanation: A parking system can use a BST to efficiently manage parking spots.
 ## Flight Booking System:
 
 Explanation: A flight booking system can utilize a BST to organize available flight seats. Each node represents a seat, and the left subtree contains available seats, while the right subtree contains booked seats.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     
@@ -1556,7 +1560,7 @@ Explanation: A flight booking system can utilize a BST to organize available fli
 ## Online Course Enrollment:
 
 Explanation: An online learning platform can use a BST to manage course enrollments. Each node represents a course, and the left subtree contains available courses, while the right subtree contains enrolled courses.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
@@ -1607,7 +1611,7 @@ Explanation: An online learning platform can use a BST to manage course enrollme
 ## Medical Records:
 
 Explanation: A medical clinic can use a BST to organize patient medical records. Each node represents a patient's record, and the left subtree contains records of patients with lower medical IDs, while the right subtree contains records of patients with higher IDs.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     
@@ -1660,7 +1664,7 @@ Explanation: A medical clinic can use a BST to organize patient medical records.
 
 ## Password Storage
 Explanation: Hashing is commonly used to securely store passwords. Instead of storing plain passwords, the system stores their hash values. When a user tries to log in, the system hashes the entered password and compares it with the stored hash.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
@@ -1689,7 +1693,7 @@ Explanation: Hashing is commonly used to securely store passwords. Instead of st
 
 ## Data Integrity Verification
 Explanation: Hashing is used to verify the integrity of data during transmission. The sender computes the hash of the data and sends it along with the data. The receiver computes the hash of the received data and compares it with the received hash.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
@@ -1723,7 +1727,7 @@ Explanation: Hashing is used to verify the integrity of data during transmission
 
 ## File Content Deduplication
 Explanation: Hashing can be used to identify duplicate files. The hash value of the file content is computed, and if the same hash value exists in the database, it indicates a duplicate file.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
@@ -1761,7 +1765,7 @@ Explanation: Hashing can be used to identify duplicate files. The hash value of 
 ## Caching
 
 Explanation: Hashing is used in caching to quickly access previously computed values. For instance, in a web server, the URLs and their corresponding responses can be cached using a hash table for faster retrieval.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
@@ -1809,7 +1813,7 @@ Explanation: Hashing is used in caching to quickly access previously computed va
 ## Distributed Key-Value Store
 
 Explanation: Hashing is used in distributed systems to assign keys to specific nodes. Each node is responsible for a range of keys based on their hash values.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
@@ -1930,7 +1934,7 @@ Explanation: A road network can be represented as a graph where intersections ar
 ## Web Page Links
 
 Explanation: A collection of web pages with links between them can be represented as a graph where web pages are nodes, and links between pages are edges.
-    
+
     #include <stdio.h>
     #include <stdbool.h>
     #include <string.h>
@@ -1974,7 +1978,7 @@ Explanation: A collection of web pages with links between them can be represente
 ## Flight Routes
 
 Explanation: Air travel routes can be represented as a graph where airports are nodes, and flight connections between airports are edges.
-    
+
     #include <stdio.h>
     #include <stdbool.h>
     #include <string.h>
@@ -2018,7 +2022,7 @@ Explanation: Air travel routes can be represented as a graph where airports are 
 ## Course Prerequisites
 
 Explanation: University courses and their prerequisites can be represented as a graph where courses are nodes, and prerequisites are edges.
-    
+
     #include <stdio.h>
     #include <stdbool.h>
     #include <string.h>
@@ -2546,7 +2550,7 @@ Explanation: In financial software, AVL trees can be used to store financial ins
 ## Online Gaming:
 
 Explanation: In online gaming, AVL trees can be used to maintain leaderboards and player scores. This allows for quick updates and retrieval of high scores.
-    
+
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
